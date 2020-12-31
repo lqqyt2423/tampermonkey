@@ -55,7 +55,7 @@
     info(`got ${links.length} videos`)
     const index = Math.floor(Math.random() * links.length)
     info(`to index ${index}: ${links[index]}`)
-    window.open(links[index], '_self')
+    window.location.href = links[index]
   }
 
   // 视频页
@@ -92,6 +92,6 @@
       info('finished')
       break
     }
-    window.open('https://www.bilibili.com/', '_self')
+    window.location.href = 'https://www.bilibili.com/'
   }
 })()
