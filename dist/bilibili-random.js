@@ -123,6 +123,18 @@
 	                await dist.sleep(1000);
 	                continue;
 	            }
+	            // 仅在第一次尝试全屏
+	            if (!loaded) {
+	                // 网页全屏
+	                const fullPageBtn = document.querySelector('#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-blackside.video-control-show > div.bilibili-player-video-wrap > div.bilibili-player-video-control-wrap > div.bilibili-player-video-control > div.bilibili-player-video-control-bottom > div.bilibili-player-video-control-bottom-right > div.bilibili-player-video-btn.bilibili-player-video-web-fullscreen');
+	                if (fullPageBtn) {
+	                    logger.info('enter web full page');
+	                    fullPageBtn.click();
+	                }
+	                else {
+	                    logger.warn('can not find full page button');
+	                }
+	            }
 	            loaded = true;
 	            logger.info('trigger play click');
 	            playBtn.click();
@@ -130,7 +142,7 @@
 	        }
 	        // 监测是否播放完了
 	        while (true) {
-	            const restartBtn = document.querySelector('#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-ending-panel-flag.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-ending-panel > div.bilibili-player-ending-panel-box.second-screen > div.bilibili-player-ending-panel-box-functions > div.bilibili-player-upinfo-spans.show > div.bilibili-player-upinfo-span.restart');
+	            const restartBtn = document.querySelector('#bilibiliPlayer > div.bilibili-player-area.video-state-pause.video-state-ending-panel-flag.progress-shadow-show > div.bilibili-player-video-wrap > div.bilibili-player-ending-panel > div.bilibili-player-ending-panel-box > div.bilibili-player-ending-panel-box-functions > div.bilibili-player-upinfo-spans.show > div.bilibili-player-upinfo-span.restart');
 	            if (!restartBtn) {
 	                logger.info('playing...');
 	                await dist.sleep(3000);
